@@ -49,6 +49,10 @@ public final class QRCodeReaderViewControllerBuilder {
    The code reader object used to scan the bar code.
    */
   public var reader = QRCodeReader()
+ 
+ 
+  public var backgroundColor = UIColor.black
+  public var cancelButtonTextColor = UIColor.white
 
   /**
    The reader container view used to display the video capture and the UI components.
