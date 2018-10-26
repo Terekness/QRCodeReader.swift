@@ -73,7 +73,7 @@ public class QRCodeReaderViewController: UIViewController {
 
     super.init(nibName: nil, bundle: nil)
 
-    view.backgroundColor = .black
+    view.backgroundColor = builder.backgroundColor
 
     codeReader.didFindCode = { [weak self] resultAsObject in
       if let weakSelf = self {
@@ -93,7 +93,7 @@ public class QRCodeReaderViewController: UIViewController {
       }
     }
 
-    setupUIComponentsWithCancelButtonTitle(builder.cancelButtonTitle)
+    setupUIComponentsWithCancelButtonTitle(builder.cancelButtonTitle, builder.cancelButtonTextColor)
   }
 
   required public init?(coder aDecoder: NSCoder) {
@@ -139,7 +139,7 @@ public class QRCodeReaderViewController: UIViewController {
 
   // MARK: - Initializing the AV Components
 
-  private func setupUIComponentsWithCancelButtonTitle(_ cancelButtonTitle: String) {
+  private func setupUIComponentsWithCancelButtonTitle(_ cancelButtonTitle: String, _ cancelButtonTextColor: UIColor) {
     view.addSubview(readerView.view)
 
     let sscb = showSwitchCameraButton && codeReader.hasFrontDevice
@@ -153,6 +153,7 @@ public class QRCodeReaderViewController: UIViewController {
     readerView.displayable.switchCameraButton?.addTarget(self, action: #selector(switchCameraAction), for: .touchUpInside)
     readerView.displayable.toggleTorchButton?.addTarget(self, action: #selector(toggleTorchAction), for: .touchUpInside)
     readerView.displayable.cancelButton?.setTitle(cancelButtonTitle, for: .normal)
+    readerView.displayable.cancelButton?.setTitleColor(cancelButtonTextColor, for: .normal)
     readerView.displayable.cancelButton?.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
 
     // Setup constraints
